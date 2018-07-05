@@ -5,6 +5,7 @@ class CreateMovies < ActiveRecord::Migration
       t.integer :rating
       t.string :review
       t.string :user_id
+      t.string :director_id
 
       t.timestamps null: false
     end
