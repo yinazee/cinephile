@@ -1,8 +1,7 @@
 class Genre < ActiveRecord::Base
   has_many :movie_genres
   has_many :movies, :through => :movie_genres
-    # has_many :directors, :through => :movies
-
+  #this also ties in with the directors assocaited with the movie.
 
   def slug
     username.downcase.gsub(" ","-")
