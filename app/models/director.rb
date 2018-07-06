@@ -1,7 +1,6 @@
 class Director < ActiveRecord::Base
   has_many :movies
-  has_many :movie_genres
-  has_many :genres, through: => :movie_genres
+  has_many :genres, :through => :movies
 
   def slug
     username.downcase.gsub(" ", "-")
