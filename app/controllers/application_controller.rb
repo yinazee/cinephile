@@ -1,3 +1,4 @@
+require 'rack-flash'
 require './config/environment'
 
 class ApplicationController < Sinatra::Base
@@ -6,15 +7,18 @@ class ApplicationController < Sinatra::Base
     set :public_folder, 'public'
     set :views, 'app/views'
     enable :sessions
-    set :session_secret, "cinephile
-    _secret"
+    set :session_secret, "cinephile_secret"
+    use Rack::Flash
   end
+# ============================================
 
   get '/' do
     erb :index
   end
 
+# ============================================
   helpers do #helper methods
+
     def logged_in?
       !!current_user #returns value true or false
     end
