@@ -6,29 +6,42 @@
     <br><br>
     <span>Director:</span>
     <%@directors.sort.each do |director|%>
-    <select name="directors">
-      <option value="Create New">Create New</option>
-      <option name="director[name]" value="<%=director.id%>"><%=director.name%></option>
-    </select>
-      <input type="checkbox" name="type[type_ids][]" value="<%=type.id%>" id="<%=type.id%>"><%=type.type_name%></input>
-      <p>...or create a new type: <input type="text" name="type[type_name]"/></p>
+    <div class="director_dropdown">
+      <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+      <div id="myDropdown" class="dropdown-content">
+        <!--creates new director only if it doesn't match any exisitng directors-->
+        <a href="/directors/new">Create New Director</a>
+        <input type="text" value="Create New Director">
+        <option name="director[name]" id="<%=@director.id%>"><%=@director.name%></option>
+      </div>
+    </div>
+          <!-- <p>Create New Director: <input type="text" name="director[name]"/></p> -->
     <%end%>
     <br><br>
-    <span>Rating:</span>
+    <div class="rating_dropdown">
+      <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+      <div id="myDropdown" class="dropdown-content">
+        <span>Rating:</span>
+          <select name="movie[rating]">
+            <% (1..5).to_a.each do |rating| %>
+              <option value="<%=rating%>"><%= number %></option>
+            <% end %>
+          </select>
+      </div>
+    </div>
+    <!-- <span>Rating:</span>
       <select name="movie[rating]">
         <% (1..5).to_a.each do |number| %>
           <option value="<%=number%>"><%= number %></option>
 
-    <p></p>
-
+    <p></p> -->
 
     <span>Review:</span>
-      <input type="text" name="tea[comments]">
-    <br><br>
+    <input type="text" id="review" name="movie[review]">
+  <br><br>
 
-        <% end %>
-      </select>
+
+
     <br><br>
     <input type="submit" value="Submit">
   </form>
-
