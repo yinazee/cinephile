@@ -4,23 +4,23 @@ class UserController < ApplicationController
     if !logged_in?
       erb :'/users/signup'
     else
-      flash[:message] = "You're logged in. Here are your movies."
+      flash[:message] = "You're logged in. Here are your movie reviews."
       redirect "/users/#{@user.slug}"
     end
   end
 
   post '/signup' do
     if params.has_value?("")
-      flash[:message] = "You must create both a username and password."
+      flash[:message] = "Enter all fields."
       redirect "/signup"
     else
       @user = User.new(params[:user])
       if @user.save
         session[:user_id] = @user.id
         redirect "/users/#{@user.slug}"
-      else
-        flash[:message] = "There was a problem creating this account!"
-        erb :'/users/signup'
+      # else
+      #   flash[:message] = "There was a problem creating this account!"
+      #   erb :'/users/signup'
       end
     end
   end
@@ -39,7 +39,7 @@ class UserController < ApplicationController
       session[:user_id] = @user.id
       redirect "/users/#{@user.slug}"
     else
-      flash[:message] = "Username and/or Password is incorrect! Try again."
+      flash[:message] = "Hm. Looks like your username and password didn't match."
       redirect "/login"
     end
   end
@@ -49,7 +49,7 @@ class UserController < ApplicationController
       redirect "/"
     else
       session.destroy
-      flash[:message] = "You have been logged out of your account."
+      flash[:message] = "Good bye is a good gift when you wave it at me because I refuse to follow a bad advice you gave. Wave it at me and I will show you the door. - Israelmore Ayivor"
       redirect "/login"
     end
   end

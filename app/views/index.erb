@@ -1,1 +1,13 @@
-welcome to cinephile
+
+<h1>***</h1>
+
+<%if logged_in?%>
+<p>Welcome, <%=current_user.username%></p>
+<a href="movies/new">Write a movie review!</a>
+
+<!-- show the last 5 movie review postings -->
+
+<%else%>
+<a href="/signup"> Sign Up</a>
+<a href="/login"> Log In</a>
+<%end%>
