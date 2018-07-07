@@ -1,0 +1,34 @@
+<h1>Yay! A New Movie Review</h1>
+
+  <form method="post" action="/users/movies">
+    <span>Movie Title</span>
+      <input type="text" id="movie" name="movie[name]">
+    <br><br>
+    <span>Director:</span>
+    <%@directors.sort.each do |director|%>
+    <select name="directors">
+      <option value="Create New">Create New</option>
+      <option name="director[name]" value="<%=director.id%>"><%=director.name%></option>
+    </select>
+      <input type="checkbox" name="type[type_ids][]" value="<%=type.id%>" id="<%=type.id%>"><%=type.type_name%></input>
+      <p>...or create a new type: <input type="text" name="type[type_name]"/></p>
+    <%end%>
+    <br><br>
+    <span>Rating:</span>
+      <select name="movie[rating]">
+        <% (1..5).to_a.each do |number| %>
+          <option value="<%=number%>"><%= number %></option>
+
+    <p></p>
+
+
+    <span>Review:</span>
+      <input type="text" name="tea[comments]">
+    <br><br>
+
+        <% end %>
+      </select>
+    <br><br>
+    <input type="submit" value="Submit">
+  </form>
+
