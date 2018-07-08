@@ -1,13 +1,9 @@
 <h2>Welcome, <%=@user.username.capitalize%></h2>
 
  <%if @user.movies.empty?%>
- <a href="/user/:slug/movies/new">Create Your First Movie Review!</a>
- <%@user.movies.each do |movie|%>
- <table style="width:100%">
-   <tr>
-     <th><%=movie.name%></th>
-     <th><%=movie.rating%></th>
-   </tr>
- </table>
- <%end%>
+  <a href="/user/:slug/movies/new">Create Your First Movie Review!</a>
+ <%else%>
+  <%@user.movies.each do |movie|%>
+    <a href="/movies/movie.slug"><%=movie.name%></a>
+  <%end%>
  <%end%>

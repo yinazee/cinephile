@@ -22,7 +22,9 @@ class MovieController < ApplicationController
   end
 
   post '/users/:slug/movies' do
-    erb :'/movies/show'
-  end
-
-end
+    if params.values.any? {|value| value == ""}
+      flash[:message] = "Please fill in all fields."
+      redirect "/users/#{current_user.slug}/movies/new"
+    else
+      binding.pry
+      
