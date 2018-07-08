@@ -12,6 +12,8 @@ class MovieController < ApplicationController
   get '/user/:slug/movies/new' do
     if logged_in?
       @user = current_user
+      @directors = Director.all
+      @genres = Genre.all
       erb :'/movies/new'
     else
       redirect '/login'
