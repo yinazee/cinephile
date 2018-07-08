@@ -25,7 +25,7 @@ class UserController < ApplicationController
     end
   end
 
-  get '/login' do
+  get '/' do
     if !logged_in?
       erb :'/users/login'
     else
@@ -40,7 +40,7 @@ class UserController < ApplicationController
       redirect "/users/#{@user.slug}"
     else
       flash[:message] = "Hm. Looks like your username and password didn't match."
-      redirect "/login"
+      redirect "/"
     end
   end
 

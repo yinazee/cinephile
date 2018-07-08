@@ -1,11 +1,11 @@
 <h1>Yay! A New Movie Review</h1>
 
-<form method="post" action="/users/teas">
+<form method="post" action="/users/<%=@user.slug%>/movies">
   <span>Movie Title:</span>
     <input type="text" id="movie_title" name="movie[name]">
   <br><br>
   <span>Rating:</span>
-    <select name="tea[rating]">
+    <select name="movie[rating]">
       <% (1..5).to_a.each do |number| %>
         <option value="<%=number%>"><%= number %></option>
       <% end %>

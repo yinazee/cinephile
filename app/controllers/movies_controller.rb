@@ -3,23 +3,26 @@ class MovieController < ApplicationController
   get '/users/:slug/movies' do
     if logged_in?
       @user = current_user
-      erb :'/moviess/index'
+      erb :'/movies/show'
     else
       redirect '/login'
     end
   end
 
-  get '/user/:slug/movies/new' do
+  get '/movies/new' do
     if logged_in?
       @user = current_user
       @directors = Director.all
       @genres = Genre.all
       erb :'/movies/new'
     else
-      redirect '/login'
+      redirect '/'
     end
     erb :'/movies/new'
   end
 
+  post '/users/:slug/movies' do
+    erb :'/movies/show'
+  end
 
 end
