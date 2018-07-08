@@ -1,1 +1,26 @@
 <a href="/movies/<%=@movie.slug"></a>
+  <br>
+  <% if flash.has?(:message) %>
+    <%= flash[:message] %>
+  <% end %>
+  <br><br>
+    <h3> <%=@movie.name%> </h3>
+
+    <br>
+
+    <span>Movie Title: </span><%=@movie.name%></p>
+    <span>Rating: <%=@movie.rating%></span>
+    <span>Director: </span><%=@movie.director%></p>
+    <span>Genres: </span><% @genres = @movie.genres.map { |t| t.name }.join(", ") %> <%= @genres %></p>
+    <span>Review: </span><%=@movie.review%></p>
+
+
+  <br><br>
+
+  <form method="post" action="/users/<%=@user.slug%>/movies/<%=@movie.id%>/delete">
+    <input id="hidden" type="hidden" name="_method" value="delete">
+    <input type="submit" value="Delete This movie">
+  </form>
+
+  <br>
+  <p><a href="/users/<%=@user.slug%>/movies/<%=@movie.id%>/edit">Edit This movie</a> | <a href="/users/<%=@user.slug%>/movies">See all your movies</a></p>
