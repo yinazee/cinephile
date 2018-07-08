@@ -7,6 +7,19 @@
 
 <!-- show the last 5 movie review postings -->
 <%else%>
-<a href="/signup"> Sign Up</a>
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+<form method="post" action="/login">
+  <label for="username">Username:</label>
+    <input type="text" id="username" name="username">
+  <br><br>
+  <label for="password">Password:</label>
+    <input type="password" id="password" name="password">
+  <br><br>
+  <input type="submit" value="Log In">
+</form>
+
 <a href="/login"> Log In</a>
 <%end%>
