@@ -4,8 +4,8 @@
   <% end %>
   <br><br>
 
-    <span>Movie Title: </span><%=@movie.name%></p>
-    <span>Rating: <%=@movie.rating%></span>
+  </span><%=@movie.name.capitalize%> Review</p>
+    <span>Rating: <%=@movie.rating%></span><br>
     <span>Director: </span><%=@director%></p>
     <span>Genres: </span><% @genres = @movie.genres.map { |t| t.name }.join(", ") %> <%= @genres %></p>
     <span>Review: </span><%=@movie.review%></p>
@@ -18,4 +18,4 @@
   </form>
 
   <br>
-  <p><a href="/users/<%=@user.slug%>/movies/<%=@movie.id%>/edit">Edit This movie</a> | <a href="/users/<%=@user.slug%>/movies">See all your movies</a></p>
+  <p><a href="/users/<%=@user.slug%>/movies/<%=@movie.id%>/edit">Edit This movie</a></p>

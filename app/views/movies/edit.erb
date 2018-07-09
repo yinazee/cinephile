@@ -1,0 +1,41 @@
+<h2>Edit Your Movie Here</h2>
+
+<form action="/users/<%=@user.slug%>/movies/<%=@movie.id%>" method="post">
+  <input type="hidden" name="_method" value="patch">
+
+  <span>Movie Title:</span>
+    <input type="text" id="movie_title" name="movie[name]">
+    <br>
+
+    <span>Rating:</span>
+      <select name="movie[rating]">
+      <% (1..5).to_a.each do |number| %>
+      <option value="<%=number%>"><%= number %></option>
+      <% end %>
+      </select>
+    <br>
+
+    <span>Directors:</span>
+      <select>
+        <%Director.all.each do |director|%>
+        <option><a href="directors/new">Create a new director</a></option>
+        <option name="director[name]"><%=director.name%></option>
+      </select>
+      <%end%>
+
+
+    <span>Genres:</span>
+      <select>
+        <%Genre.all.each do |genre|%>
+        <option><a href="directors/new">Create a new director</a></option>
+        <option name="director[name]"><%=genre.name%></option>
+      </select>
+      <%end%>
+
+    <span>Review:</span>
+      <input type="text" id="review" name="movie[review]">
+     <br>
+
+     <input type="submit" value="Edit"> | <a href="users/<%=@user.slug%>/movies/<%=@movie.id%>">Cancel</a>
+
+</form>
