@@ -4,38 +4,43 @@
   <input type="hidden" name="_method" value="patch">
 
   <span>Movie Title:</span>
-    <input type="text" id="movie_title" name="movie[name]">
+    <input type="text" id="movie_title" name="movie[name]" value="<%=@movie.name%>">
     <br>
 
     <span>Rating:</span>
-      <select name="movie[rating]">
+      <select name="movie[rating]" >
       <% (1..5).to_a.each do |number| %>
-      <option value="<%=number%>"><%= number %></option>
+      <option value="number"><%= number %></option>
+        <option selected="selected" value="<%=number%>"><%= @movie.rating %></option>
       <% end %>
       </select>
     <br>
 
-    <span>Directors:</span>
+    <span>Director:</span>
       <select>
         <%Director.all.each do |director|%>
-        <option><a href="directors/new">Create a new director</a></option>
-        <option name="director[name]"><%=director.name%></option>
+        <option><a href="directors/new">Create a new Director</a></option>
+        <option selected="selected" value="<%=@movie.director%>"><%= @movie.director %></option>
       </select>
       <%end%>
 
 
     <span>Genres:</span>
-      <select>
+      <select multiple>
         <%Genre.all.each do |genre|%>
-        <option><a href="directors/new">Create a new director</a></option>
-        <option name="director[name]"><%=genre.name%></option>
+        <option><a href="genres/new">Create a new Genre</a></option>
+        <option selected="selected" value="<%=@movie.genres%>"><%= @movie.genres %></option>
       </select>
       <%end%>
 
     <span>Review:</span>
-      <input type="text" id="review" name="movie[review]">
+      <input type="text" id="review" name="movie[review]" value="<%=@movie.review%>"/>
      <br>
 
-     <input type="submit" value="Edit"> | <a href="users/<%=@user.slug%>/movies/<%=@movie.id%>">Cancel</a>
+     <input type="submit" value="Edit"> |
+
+     <button type="cancel" onclick="users/<%=@user.slug%>/movies/<%=@movie.id%>;return false;">Cancel</button>
+
+
 
 </form>

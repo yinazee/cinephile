@@ -66,4 +66,7 @@ class MovieController < ApplicationController
     end
   end
 
+  patch '/users/:slug/movies/:id' do
+  end
+
 end

@@ -13,7 +13,7 @@
       </select>
     <br>
 
-    <span>Directors:</span>
+    <span>Director:</span>
       <select>
         <%Director.all.each do |director|%>
         <option><a href="directors/new">Create a new director</a></option>
@@ -23,7 +23,7 @@
 
 
     <span>Genres:</span>
-      <select>
+      <select multiple>
         <%Genre.all.each do |genre|%>
         <option><a href="directors/new">Create a new director</a></option>
         <option name="director[name]"><%=genre.name%></option>
