@@ -1,0 +1,2 @@
+class DirectorController < ApplicationController
+end

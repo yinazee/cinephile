@@ -1,34 +1,39 @@
 <h1>Yay! A New Movie Review</h1>
 
-<form method="post" action="/users/<%=@user.slug%>/movies%>">
+<form method="post" action="/users/<%=@user.slug%>/movies">
   <span>Movie Title:</span>
     <input type="text" id="movie_title" name="movie[name]">
-  <br><br>
+    <br>
 
-  <span>Rating:</span>
-    <select name="movie[rating]">
+    <span>Rating:</span>
+      <select name="movie[rating]">
       <% (1..5).to_a.each do |number| %>
-        <option value="<%=number%>"><%= number %></option>
+      <option value="<%=number%>"><%= number %></option>
       <% end %>
-    </select>
-  <br><br>
+      </select>
+    <br>
 
-  <span>Director:</span>
-  <%@directors.each do |director|%>
-    <input type="checkbox" name="director[director_ids][]" value="<%=director.id%>" id="<%=director.id%>"><%=director.name%></input>
-  <%end%>
-   <p>Or Create New Director:<input type="text" name="director[name]"/></p>
+    <span>Directors:</span>
+      <select>
+        <%Director.all.each do |director|%>
+        <option><a href="directors/new">Create a new director</a></option>
+        <option name="director[name]"><%=director.name%></option>
+      </select>
+      <%end%>
 
-   <span>Genre:</span>
-   <%@genres.each do |genre|%>
-     <input type="checkbox" name="genre[genre_ids][]" value="<%=genre.id%>" id="<%=genre.id%>"><%=genre.name%></input>
-     <%end%>
-     <p>Or Create New Genre:<input type="text" name="genre[genre_name]"/></p>
-   <br><br>
 
-   <span>Review:</span>
-     <input type="text" id="review" name="movie[review]">
-     <br><br>
+    <span>Genres:</span>
+      <select>
+        <%Genre.all.each do |genre|%>
+        <option><a href="directors/new">Create a new director</a></option>
+        <option name="director[name]"><%=genre.name%></option>
+      </select>
+      <%end%>
 
-  <input type="submit" value="Submit">
+    <span>Review:</span>
+      <input type="text" id="review" name="movie[review]">
+     <br>
+
+     <input type="submit" value="Submit">
+
 </form>

@@ -1,19 +1,14 @@
-<a href="/movies/<%=@movie.slug"></a>
-  <br>
+<br>
   <% if flash.has?(:message) %>
     <%= flash[:message] %>
   <% end %>
   <br><br>
-    <h3> <%=@movie.name%> </h3>
-
-    <br>
 
     <span>Movie Title: </span><%=@movie.name%></p>
     <span>Rating: <%=@movie.rating%></span>
-    <span>Director: </span><%=@movie.director%></p>
+    <span>Director: </span><%=@director%></p>
     <span>Genres: </span><% @genres = @movie.genres.map { |t| t.name }.join(", ") %> <%= @genres %></p>
     <span>Review: </span><%=@movie.review%></p>
-
 
   <br><br>
 

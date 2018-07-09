@@ -9,11 +9,9 @@ class MovieController < ApplicationController
     end
   end
 
-  get '/movies/new' do
+  get '/user/:slug/movies/new' do
     if logged_in?
       @user = current_user
-      @directors = Director.all
-      @genres = Genre.all
       erb :'/movies/new'
     else
       redirect '/'
@@ -21,19 +19,24 @@ class MovieController < ApplicationController
     erb :'/movies/new'
   end
 
-  post '/users/teas' do
+  post '/users/:slug/movies' do
       if params.values.any? {|value| value == ""}
         flash[:message] = "Please enter ALL fields**"
-        redirect "/users/#{current_user.slug}/teas/new"
+        redirect "/users/#{current_user.slug}/movies/new"
       else
         @movie = current_user.movies.build(params[:movie])
-        if !params[:genre][:name].blank? && @movie.genres.nil? #creating the first type by creating its params as type_name
-          @movie.genres.new(name: params[:genre][:name])
-        elsif !params[:genre][:name].blank? && !@movie.genres.nil? #selecting an existing type from the checkbox AND creating a new type (a tea that has more than one type)
+        @director = params[:director]
+        @genre = params[:genre]
+
+        if !params[:genre][:name].blank? && @movie.genres.nil?
+          #if a new genre is entered and none of the checkboxes selected
+          @movie.genres << Genre.create(params[:name])
+        elsif !params[:genre][:name].blank? && !@movie.genres.nil?
+          #selecting an existing type from the checkbox AND creating a new genre)
           @movie.genres << @movie.genres.new(name: params[:genre][:name])
-          @movie.genre_ids = params[:genre][:ids]
         else params[:genre][:name].blank? && !@movie.genres.nil?
-          @movie.genre_ids = params[:genre][:genre_ids] #the type has already been created and is shown as checkboxes
+          @movie.genre_ids = params[:genre][:genre_ids]
+          #the type has already been created and is shown as checkboxes
         end
         if @movie.save
           redirect "/users/#{current_user.slug}/movies/#{@movie.id}"
@@ -43,4 +46,13 @@ class MovieController < ApplicationController
       end
     end
 
+    get '/users/:slug/teas/:id' do
+      if logged_in?
+        @user = current_user
+        @movie = movie.find(params[:id])
+        erb :'/movies/show'
+      else
+        redirect '/login'
+      end
+    end
 end
