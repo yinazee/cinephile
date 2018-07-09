@@ -28,16 +28,16 @@ class MovieController < ApplicationController
         @director = params[:director]
         @genre = params[:genre]
 
-        if !params[:genre][:name].blank? && @movie.genres.nil?
-          #if a new genre is entered and none of the checkboxes selected
-          @movie.genres << Genre.create(params[:name])
-        elsif !params[:genre][:name].blank? && !@movie.genres.nil?
-          #selecting an existing type from the checkbox AND creating a new genre)
-          @movie.genres << @movie.genres.new(name: params[:genre][:name])
-        else params[:genre][:name].blank? && !@movie.genres.nil?
-          @movie.genre_ids = params[:genre][:genre_ids]
-          #the type has already been created and is shown as checkboxes
-        end
+        # if !params[:genre][:name].blank? && @movie.genres.nil?
+        #   #if a new genre is entered and none of the checkboxes selected
+        #   @movie.genres << Genre.create(params[:name])
+        # elsif !params[:genre][:name].blank? && !@movie.genres.nil?
+        #   #selecting an existing type from the checkbox AND creating a new genre)
+        #   @movie.genres << @movie.genres.new(name: params[:genre][:name])
+        # else params[:genre][:name].blank? && !@movie.genres.nil?
+        #   @movie.genre_ids = params[:genre][:genre_ids]
+        #   #the type has already been created and is shown as checkboxes
+        # end
         if @movie.save
           redirect "/users/#{current_user.slug}/movies/#{@movie.id}"
         else
@@ -46,10 +46,10 @@ class MovieController < ApplicationController
       end
     end
 
-    get '/users/:slug/teas/:id' do
+    get '/users/:slug/movies/:id' do
       if logged_in?
         @user = current_user
-        @movie = movie.find(params[:id])
+        @movie = Movie.find(params[:id])
         erb :'/movies/show'
       else
         redirect '/login'
