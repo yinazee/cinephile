@@ -6,8 +6,8 @@
 
   </span><%=@movie.name.capitalize%> Review</p>
     <span>Rating: <%=@movie.rating%></span><br>
-    <span>Director: </span><%=@director%></p>
-    <span>Genres: </span><% @genres = @movie.genres.map { |t| t.name }.join(", ") %> <%= @genres %></p>
+    <span>Director: </span><%=@movie.director%></p>
+    <span>Genres: </span><% @movie.genres.map { |t| t.name }.join(", ") %> <%= @genres %></p>
     <span>Review: </span><%=@movie.review%></p>
 
   <br><br>
