@@ -1,6 +1,14 @@
--verify email
--prevent duplicate username
--javascript(?) pop up of creating directors and genres
+
+
+priority
+-deleting an entry and then being redirected to user/show page not working
 -should not be able to log in with incomplete fields
 -how to allow users to create multiple genres by comma seperation
 -parse 300 directors https://digitaldreamdoor.com/pages/movie-pages/movie_directors.html
+-how to get main.css going
+
+not priority
+-verify email
+-password requirement
+-prevent duplicate username
+-javascript(?) pop up of creating directors and genres

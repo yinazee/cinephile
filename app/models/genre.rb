@@ -4,7 +4,7 @@ class Genre < ActiveRecord::Base
   #this also ties in with the directors assocaited with the movie.
 
   def slug
-    username.downcase.gsub(" ","-")
+    name.downcase.gsub(" ","-")
   end
 
   def self.find_by_slug(slug)

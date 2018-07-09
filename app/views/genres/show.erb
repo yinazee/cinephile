@@ -1,0 +1,6 @@
+Movies by Genre
+<%if Genre.all.empty?%>
+<a href="/genres/new">Create a new Genre</a>
+<%@genre.sort.each do |genre|%>
+<a href="/genres/<%=genre.slug%>"><%=genre.slug%></a>
+<%end%>

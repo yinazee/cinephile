@@ -89,4 +89,20 @@ class MovieController < ApplicationController
    end
   end
 
+  delete '/users/:slug/movies/:id/delete' do
+    if logged_in?
+     @user = current_user
+     @movie = Movie.find(params[:id])
+     if @movie.user_id == session[:user_id]
+       @movie.delete
+       flash[:message] = "Movie review deleted!"
+       redirect "/users/#{current_user.slug}/movies"
+     else
+       redirect "/users/#{current_user.slug}/movies"
+     end
+   else
+     redirect '/'
+   end
+  end
+
 end
