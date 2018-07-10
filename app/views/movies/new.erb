@@ -23,14 +23,12 @@
       <br/>
 
 
-    <span>Genres:</span>
-      <select multiple>
-        <%Genre.all.each do |genre|%>
-        <option name="genre[name]"><%=genre.name%></option>
-        <%end%>
-      </select>
-      <br/>
-
+      <span>Genres:</span>
+          <%@genres.each do |type|%>
+            <input type="checkbox" name="genre[genre_ids][]" value="<%=genre.id%>" id="<%=genre.id%>"><%=genre.genre_name%></input>
+          <%end%>
+          <p></p>
+           <p>Or Create New Genre: <input type="text" name="genre[genre_name]"/></p>
 
 
     <span>Review:</span>
