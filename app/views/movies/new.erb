@@ -16,19 +16,22 @@
     <span>Director:</span>
       <select>
         <%Director.all.each do |director|%>
-        <option><a href="directors/new">Create a new director</a></option>
+        <option><a href="directors/new">Create New Director</a></option>
         <option name="director[name]"><%=director.name%></option>
+        <%end%>
       </select>
-      <%end%>
+      <br/>
 
 
     <span>Genres:</span>
       <select multiple>
         <%Genre.all.each do |genre|%>
-        <option><a href="directors/new">Create a new director</a></option>
-        <option name="director[name]"><%=genre.name%></option>
+        <option name="genre[name]"><%=genre.name%></option>
+        <%end%>
       </select>
-      <%end%>
+      <br/>
+
+
 
     <span>Review:</span>
       <input type="text" id="review" name="movie[review]">
