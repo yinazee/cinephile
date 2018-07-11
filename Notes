@@ -12,3 +12,8 @@ not priority
 -password requirement
 -prevent duplicate username
 -javascript(?) pop up of creating directors and genres
+
+Director scraper controller
+if Director.count < 300
+DirScraper.scrape_url
+end

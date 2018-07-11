@@ -14,21 +14,23 @@
     <br>
 
     <span>Director:</span>
+
       <select>
         <%Director.all.each do |director|%>
-        <option><a href="directors/new">Create New Director</a></option>
-        <option name="director[name]"><%=director.name%></option>
+        <option name="director[name]" value="<%=director.name%>"><%=director.name%></option>
         <%end%>
-      </select>
-      <br/>
+      </select><br>
+      Or Create New Director: <input type="text" name="director[name]"/>
+      <br>
 
 
       <span>Genres:</span>
-          <%@genres.each do |type|%>
-            <input type="checkbox" name="genre[genre_ids][]" value="<%=genre.id%>" id="<%=genre.id%>"><%=genre.name%></input>
-          <%end%>
-          <p></p>
-           <p>Or Create New Genre: <input type="text" name="genre[genre_name]"/></p>
+        <%Genre.all.each do |genre|%>
+          <input type="checkbox" id="genre_<%=genre.id%>" value="<%=genre.name%>" name="movie[genre_ids][]">
+          <label><%=genre.name%></label>
+          <%end%><br>
+        Or Create New Genre: <input type="text" name="genre[name]"/><br>
+
 
 
     <span>Review:</span>
