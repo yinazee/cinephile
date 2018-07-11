@@ -25,7 +25,7 @@
 
       <span>Genres:</span>
           <%@genres.each do |type|%>
-            <input type="checkbox" name="genre[genre_ids][]" value="<%=genre.id%>" id="<%=genre.id%>"><%=genre.genre_name%></input>
+            <input type="checkbox" name="genre[genre_ids][]" value="<%=genre.id%>" id="<%=genre.id%>"><%=genre.name%></input>
           <%end%>
           <p></p>
            <p>Or Create New Genre: <input type="text" name="genre[genre_name]"/></p>
