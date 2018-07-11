@@ -1,0 +1,10 @@
+-this page shows all directors
+-only directors with movies will show as a hyperlink
+-the hyperlink should redirect you to a page that shows all movies by that director
+
+Movies by Directors
+<%if Director.all.empty?%>
+<a href="/genres/new">Create a new Genre</a>
+<%@genre.sort.each do |genre|%>
+<a href="/genres/<%=genre.slug%>"><%=genre.slug%></a>
+<%end%>
