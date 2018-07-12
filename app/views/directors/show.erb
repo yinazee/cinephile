@@ -4,7 +4,8 @@
 
 Movies by Directors
 <%if Director.all.empty?%>
-<a href="/genres/new">Create a new Genre</a>
-<%@genre.sort.each do |genre|%>
-<a href="/genres/<%=genre.slug%>"><%=genre.slug%></a>
+<a href="/genres/new">Create a new Director</a>
+<%else%>
+<%@directors.sort.each do |director|%>
+<a href="/directors/<%=director.slug%>"><%=director.slug%></a>
 <%end%>
