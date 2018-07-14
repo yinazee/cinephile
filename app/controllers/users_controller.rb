@@ -34,10 +34,6 @@ class UserController < ApplicationController
   end
 
   post '/login' do
-    # if Director.count < 300
-    #   DirScraper.scrape_url
-    # end
-
     @user = User.find_by_slug(params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
@@ -53,7 +49,7 @@ class UserController < ApplicationController
       redirect "/"
     else
       session.destroy
-      flash[:message] = "Good bye is a good gift when you wave it at me because I refuse to follow a bad advice you gave. Wave it at me and I will show you the door. - Israelmore Ayivor"
+      flash[:message] = "Good night and Good luck! - Edward R. Murrow"
       redirect "/"
     end
   end

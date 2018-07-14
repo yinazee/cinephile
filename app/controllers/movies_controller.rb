@@ -3,7 +3,7 @@ class MovieController < ApplicationController
   get '/users/:slug/movies' do
     if logged_in?
       @user = current_user
-      erb :'/movies/show'
+      erb :'/users/show'
     else
       redirect '/login'
     end
@@ -11,6 +11,9 @@ class MovieController < ApplicationController
 
   get '/user/:slug/movies/new' do
     if logged_in?
+      if Director.count < 300
+        DirScraper.scrape_url
+      end
       @user = current_user
       @genres = Genre.all
       erb :'/movies/new'
@@ -20,9 +23,9 @@ class MovieController < ApplicationController
     erb :'/movies/new'
   end
 
-  post '/users/:slug/movies' do
+  post '/users/:slug/movies/:id' do
       if params.values.any? {|value| value == ""}
-        flash[:message] = "Please enter ALL fields**"
+        flash[:message] = "**Please enter ALL fields**"
         redirect "/users/#{current_user.slug}/movies/new"
       else
         @movie = current_user.movies.build(params[:movie])
