@@ -14,6 +14,9 @@ class DirScraper < ActiveRecord::Base
     end
     # Director objects are being created but the names are nil
     binding.pry
+    test
+    test
+
     # a list of filmmakers
     # filmmakers = list.slice(0, list.length)
     # the first one is nil and needs to be removed
