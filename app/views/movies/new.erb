@@ -19,10 +19,10 @@
     <span>Director:</span>
       <select>
         <%Director.all.each do |director|%>
-        <option id="director_<%director.id%>" name="director[director_ids][]" value="<%=director.name%>"><%=director.name%></option>
+        <option name="director[director_ids][]" value="<%=director.name%>" id="<%=director.id%>"><%=director.name%></<option>
         <%end%>
       </select><br>
-      Or Create New Director: <input type="text" name="director[name]"/>
+      Or Create New Director: <input id= "director_id" type="text" name="director[name]"/>
       <br>
       <br>
 
@@ -32,7 +32,7 @@
           <label><%=genre.name%></label>
           <%end%>
           <br>
-        Or Create New Genre: <input type="text" name="genre[name]"/>
+        Or Create New Genre(s): <input id="genre_id" type="text" name="genre[name]"/>
         <br>
         <br>
 

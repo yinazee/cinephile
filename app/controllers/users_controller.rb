@@ -45,13 +45,9 @@ class UserController < ApplicationController
   end
 
   get '/logout' do
-    if !logged_in?
-      redirect "/"
-    else
       session.destroy
       flash[:message] = "Good night and Good luck! - Edward R. Murrow"
       redirect "/"
-    end
   end
 
   get '/users/:slug' do

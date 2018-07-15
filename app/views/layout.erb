@@ -29,8 +29,14 @@
   </div>
 
   <div class="bottom">
+    <%if logged_in?%>
+    Logged in as <%=@user.slug.capitalize%>
+    <%end%>
+    <br>
+    <br>
     <%= yield %>
-    <br><br>
+    <br>
+    <br>
 
   <footer class="copyright">
     <small>&copy; 2018 <strong>Cinephile 🎬 by Yina Zhu</strong></small>

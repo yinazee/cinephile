@@ -28,8 +28,8 @@ class MovieController < ApplicationController
         flash[:message] = "**Please enter ALL fields**"
         redirect "/users/#{current_user.slug}/movies/new"
       else
-    
-                @movie = current_user.movies.build(params[:movie])
+        # binding.pry
+        @movie = current_user.movies.build(params[:movie])
         @director = Director.find_by(params[:director][:name])
         @genre = params[:genre]
 
@@ -44,8 +44,10 @@ class MovieController < ApplicationController
         #   #the genre has already been created and is shown as checkboxes
         # end
         if @movie.save
+          flash[:message] = "New movie succesfully saved!"
           redirect "/users/#{current_user.slug}/movies/#{@movie.id}"
         else
+          flash[:message] = "**Please enter ALL fields**"
           redirect "/users/#{current_user.slug}/movies/new"
         end
       end

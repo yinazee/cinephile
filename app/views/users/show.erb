@@ -3,7 +3,9 @@
  <%if @user.movies.empty?%>
   <a href="/user/:slug/movies/new">Create Your First Movie Review!</a>
  <%else%>
-  <%@user.movies.each do |movie|%>
-    <a href="/movies/movie.slug"><%=movie.name%></a>
+  <%@user.movies.each_with_index do |movie, index|%>
+    <%=index+1%>. <a href="/movies/movie.slug"><%=movie.name%></a>
+    <br>
+    <br>
   <%end%>
  <%end%>
