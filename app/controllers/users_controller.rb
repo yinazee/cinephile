@@ -34,6 +34,9 @@ class UserController < ApplicationController
   end
 
   post '/login' do
+    if Director.count < 300
+      DirScraper.scrape_url
+    end
     @user = User.find_by_slug(params[:username])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
