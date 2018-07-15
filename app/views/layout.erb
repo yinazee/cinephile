@@ -3,43 +3,37 @@
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1" />
+  <!--tab icon 🎬-->
   <link href="data:image/x-icon;base64,AAABAAEAEBAAAAEACABoBQAAFgAAACgAAAAQAAAAIAAAAAEACAAAAAAAAAEAAAAAAAAAAAAAAAEAAAAAAAAAAAAA////AA0NDQCTk5MABgYGAP7+/gDj4+MA/f39AAQEBADh4eEAv7+/AAMDAwD7+/sAe3t7ANnZ2QACAgIA+vr6AAEBAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAgAAAAAEQAAAAAAAAAAAAAPAAAAABEAAAAAAAAAAAAADwAAAAARAAAAAAARAAAAAAAAAAAAEQAAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAAAAAAARAAoKCgoKCgoKCgoKCgoKEQAAAAAAAAAAAAAAAAAAABEAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAAAAAAAAAAADxEADgAAAQEAAAEBAAABAQAAEQYQAQEBAQEBAQEBAQEBBAEAAAsBBQwBAQEBAQEBAQEBAQENBQAACAEBAxABAQEBAQEBAQEBAQUFAAAABQECAQEBAQEBAQEBAQEBBwkAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=" rel="icon" type="image/x-icon" />
-  <title>Cinephile 🎬</title>
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-  <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Tangerine">
-          <style>
-     title {
-       font-family: 'Tangerine', serif;
-       font-size: 48px;
-     }
-   </style>
+  <link rel="stylesheet" href="/stylesheets/main.css"/>
+  <link href="https://fonts.googleapis.com/css?family=Tangerine" rel="stylesheet">
+  <title>Cinephile</title>
 </head>
 <body>
-  <div class="wrapper">
+  <div class="top">
 
   <h1>Cinephile</h1>
     <ul>
-      <li><a href="/">Main</a></li>
-      <li><a href="/movies/show">Movies</a></li>
-      <li><a href="/directors/show">By Director</a></li>
-      <li><a href="/genres/show">By Genre</a></li>
-      <li><a href="/ratings/show">By Rating</a></li>
-
-      <li><a href="/logout">Log Out</a></li>
+      <li><a id="main" href="/">Main</a></li>
+      <li><a id="main" href="/movies/show">Movies</a></li>
+      <li><a id="main" href="/directors/show">Director</a></li>
+      <li><a id="main" href="/genres/show">Genre</a></li>
+      <li><a id="main" href="/ratings/show">Rating</a></li>
+      <li><a id="main" href="/logout">Log Out</a></li>
     </ul>
-
-    <br>
-
-      <%= yield %>
-
-    <footer class="copyright">
-      <small>&copy; 2018 Yina Zhu All Rights Reserved <strong>Cinephile</strong></small>
-    </footer>
   </div>
 
+  <div class="bottom">
+    <%= yield %>
+    <br><br>
+
+  <footer class="copyright">
+    <small>&copy; 2018 <strong>Cinephile 🎬 by Yina Zhu</strong></small>
+  </footer>
+
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+  </div>
+
 
 </body>

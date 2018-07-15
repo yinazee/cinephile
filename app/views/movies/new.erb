@@ -1,6 +1,7 @@
-<h1>Yay! A New Movie Review</h1>
+<h2>Yay! A New Movie Review</h2>
 
-<form method="post" action="/users/<%=@user.slug%>/movies/<%=@movie.slug%>">
+<form method="post" action="/users/<%=@user.slug%>/movies/new">
+  
   <span>Movie Title:</span>
     <input type="text" id="movie_title" name="movie[name]">
     <br>
@@ -26,15 +27,17 @@
 
       <span>Genres:</span>
         <%Genre.all.each do |genre|%>
+        <select>
           <input type="checkbox" id="genre_<%=genre.id%>" value="<%=genre.name%>" name="movie[genre_ids][]">
           <label><%=genre.name%></label>
           <%end%><br>
+        </select>
+
         Or Create New Genre: <input type="text" name="genre[name]"/><br>
 
 
-
     <span>Review:</span>
-      <input type="text" id="review" name="movie[review]">
+      <input id="textboxid" type="text" id="review" name="movie[review]">
      <br>
 
      <input type="submit" value="Submit">

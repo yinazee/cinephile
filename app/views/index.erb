@@ -1,26 +1,29 @@
-<%if logged_in?%>
-<p>Welcome, <%=current_user.username%></p>
-<a href="/user/<%=current_user.slug%>/movies/new">Write a movie review!</a>
 
-<!-- show the last 5 movie review postings -->
-<%else%>
-<% if flash.has?(:message) %>
-  <%= flash[:message] %>
-<% end %>
+  <% if logged_in? %>
+    <h2>Welcome, <%= current_user.username.capitalize %>!</h2>
+  <% else %>
+    <% if flash.has?(:message) %>
+    <%= flash[:message] %>
+  <% end %>
 
-<form method="post" action="/login">
-  <label for="username">Username:</label>
+  <br>
+  <form method="post" action="/login">
+    <label for="username">Username:</label>
     <input type="text" id="username" name="username">
-  <br><br>
+    <br><br>
   <label for="password">Password:</label>
     <input type="password" id="password" name="password">
-  <br><br>
-  <input type="submit" value="Log In">
-</form>
+    <br><br>
+    <input type="submit" value="Log In">
+  </form>
 
 <a href="/signup"> Sign Up </a>
-<%end%>
+<% end %>
 
-Read The Latest Movie Reviews!
-
-<%=Movie.last(5).reverse%>
+<% if @movies.empty? %>
+  <a href="/user/<%=@user.slug%>/movies/new">Write your first movie review!</a>
+<% else %>
+  <% @movies.collect do |movie| %>
+  <a href="/users/<% @user.slug %>/movies/<%= movie.slug %>"><%= movie.slug %></a>
+<% end %>
+<% end %>
