@@ -23,13 +23,14 @@ class MovieController < ApplicationController
     erb :'/movies/new'
   end
 
-  post '/users/:slug/movies/:id' do
+  post '/users/:slug/movies' do
       if params.values.any? {|value| value == ""}
         flash[:message] = "**Please enter ALL fields**"
         redirect "/users/#{current_user.slug}/movies/new"
       else
-        @movie = current_user.movies.build(params[:movie])
-        @director = params[:director]
+    
+                @movie = current_user.movies.build(params[:movie])
+        @director = Director.find_by(params[:director][:name])
         @genre = params[:genre]
 
         # if !params[:genre][:name].blank? && @movie.genres.nil?

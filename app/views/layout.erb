@@ -17,10 +17,14 @@
     <ul>
       <li><a id="main" href="/">Main</a></li>
       <li><a id="main" href="/movies/show">Movies</a></li>
-      <li><a id="main" href="/directors/show">Director</a></li>
-      <li><a id="main" href="/genres/show">Genre</a></li>
-      <li><a id="main" href="/ratings/show">Rating</a></li>
+      <li><a id="main" href="/directors/show">Directors</a></li>
+      <li><a id="main" href="/genres/show">Genres</a></li>
+      <li><a id="main" href="/ratings/show">Ratings</a></li>
+      <% if !logged_in? %>
+      <li><a id="main" href="/signup">Sign Up</a></li>
+      <% else %>
       <li><a id="main" href="/logout">Log Out</a></li>
+      <% end %>
     </ul>
   </div>
 

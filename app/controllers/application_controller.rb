@@ -13,8 +13,6 @@ class ApplicationController < Sinatra::Base
 # ============================================
 
   get '/' do
-    @user = current_user
-    @movies = Movie.all
     erb :index
   end
 

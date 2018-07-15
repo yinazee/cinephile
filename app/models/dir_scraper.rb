@@ -20,7 +20,7 @@ class DirScraper < ActiveRecord::Base
     name_order = name_array.sort
     name_order.collect.each do |name|
     Director.create(name: name)
-
+    binding.pry
     end
   end
 

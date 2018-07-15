@@ -4,7 +4,6 @@ class UserController < ApplicationController
     if !logged_in?
       erb :'/users/signup'
     else
-      flash[:message] = "You're logged in. Here are your movie reviews."
       redirect "/users/#{@user.slug}"
     end
   end
@@ -25,10 +24,11 @@ class UserController < ApplicationController
     end
   end
 
-  get '/' do
+  get '/login' do
     if !logged_in?
-      erb :'/users/login'
+      erb :'index'
     else
+      flash[:message] = "You're logged in. Here are your movie reviews."
       redirect "/users/#{@user.slug}"
     end
   end
@@ -39,7 +39,7 @@ class UserController < ApplicationController
       session[:user_id] = @user.id
       redirect "/users/#{@user.slug}"
     else
-      flash[:message] = "Hm. Looks like your username and password didn't match."
+      flash[:message] = "Username and Password didn't match. Please try again."
       redirect "/"
     end
   end
