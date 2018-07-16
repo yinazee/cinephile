@@ -3,14 +3,20 @@
     <%= flash[:message] %>
   <% end %>
   <br><br>
-
-  </span><%=@movie.name.capitalize%> Review</p>
-    <span>Rating: <%=@movie.rating%></span><br>
-    <span>Director: </span><%=@movie.director%></p>
-    <span>Genres: </span><% @genres.name.map { |t| t.name }.join(", ")%> <%= @genres.name %></p>
-    <span>Review: </span><%=@movie.review%></p>
-
-  <br><br>
+  <h2><%=@movie.name.capitalize%> Review</h2>
+    <br>
+    <span>Rating:<%=@movie.rating%><span>
+    <br>
+    <br>
+    <span>Director: </span><%=@movie.director.name%>
+    <br>
+    <br>
+    <span>Genres: </span><%= @movie.genres.map {|genre| genre.name}.join(", ") %>
+    <br>
+    <br>
+    <span>Review: </span><%=@movie.review%>
+    <br>
+    <br>
 
   <form method="post" action="/users/<%=@user.slug%>/movies/<%=@movie.id%>/delete">
     <input id="hidden" type="hidden" name="_method" value="delete">

@@ -26,7 +26,7 @@
       Or Create New Director: <input id= "director_id" type="text" name="director[name]"/>
       <br>
       <br>
-<%binding.pry%>
+
       <span>Genres:</span>
         <%Genre.all.each do |genre|%>
           <input type="checkbox" id="<%=genre.id%>" name="movie[genre_ids][]" value="<%=genre.name%>">

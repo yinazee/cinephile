@@ -28,21 +28,23 @@ class MovieController < ApplicationController
         flash[:message] = "**Please enter ALL fields**"
         redirect "/users/#{current_user.slug}/movies/new"
       else
-
-        @movie = current_user.movies.build(params[:movie])
-
-        if !params[:director].blank?
-          @movie.director = Director.find_by(params[:id])
-        else
+        @movie = current_user.movies.build(params[:movies])
+  
+        @movie.name = params[:movie][:name]
+        @movie.rating = params[:movie][:rating]
+        @movie.review = params[:movie][:review]
+        if !params[:director][:name].blank?
           @movie.director = Director.create(params[:director])
-        end
-        binding.pry
-        if params[:genre]empty
-          @genre = Genre.find_by(params[:genre][:name])
-          @movie.genres << Genre.create(params[:name])
         else
-          @genre = Genre.find_by(params[:id])
-          @movie.genres << Genre.create(params[:name])
+          @movie.director = Director.find(params[:director][:id])
+        end
+        if params[:movie][:genre_ids] && params[:genre]#Genre checkbox AND New Genre
+          @movie.genres << Genre.create(params[:genre])
+          @movie.genres << Genre.find_by_name(params[:movie][:genre_ids])
+        elsif params[:movie][:genre_ids]#Genre check box only
+          @movie.genres << Genre.find_by(params[:movie][:genre_ids])
+        else #New Genre only
+          @movie.genres << Genre.create(params[:genre])
         end
 
         if @movie.save
@@ -54,6 +56,7 @@ class MovieController < ApplicationController
         end
       end
     end
+
 
     get '/users/:slug/movies/:id' do
       if logged_in?
