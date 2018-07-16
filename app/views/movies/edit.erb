@@ -1,4 +1,4 @@
-<h2>Edit Your Movie Here</h2>
+<h2>Edit <%=@movie.name%></h2>
 
 <form action="/users/<%=@user.slug%>/movies/<%=@movie.id%>" method="post">
   <input type="hidden" name="_method" value="patch">
@@ -19,8 +19,9 @@
     <span>Director:</span>
       <select>
         <%Director.all.each do |director|%>
-        <option><a href="directors/new">Create a new Director</a></option>
-        <option selected="selected" value="<%=@movie.director%>"><%= @movie.director %></option>
+        <option selected="selected" value="<%=@movie.director.name%>"><%= @movie.director.name %></option>
+        Or Create New Director: <input id= "director_id" type="text" name="director[name]"/>
+        <br>
       </select>
       <%end%>
 

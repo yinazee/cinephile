@@ -29,15 +29,16 @@ class MovieController < ApplicationController
         redirect "/users/#{current_user.slug}/movies/new"
       else
         @movie = current_user.movies.build(params[:movies])
-
         @movie.name = params[:movie][:name]
         @movie.rating = params[:movie][:rating]
         @movie.review = params[:movie][:review]
+
         if !params[:director][:id].blank?
           @movie.director = Director.find(params[:id])
         else !params[:director][:name].blank?
           @movie.director = Director.create(params[:director])
         end
+        
         if params[:movie][:genre_ids] && params[:genre]#Genre checkbox AND New Genre
           @movie.genres << Genre.create(params[:genre])
           @movie.genres << Genre.find_by_name(params[:movie][:genre_ids])
