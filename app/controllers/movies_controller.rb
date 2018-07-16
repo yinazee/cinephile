@@ -28,21 +28,23 @@ class MovieController < ApplicationController
         flash[:message] = "**Please enter ALL fields**"
         redirect "/users/#{current_user.slug}/movies/new"
       else
-        # binding.pry
-        @movie = current_user.movies.build(params[:movie])
-        @director = Director.find_by(params[:director][:name])
-        @genre = params[:genre]
 
-        # if !params[:genre][:name].blank? && @movie.genres.nil?
-        #   #if a new genre is entered and none of the checkboxes selected
-        #   @movie.genres << Genre.create(params[:name])
-        # elsif !params[:genre][:name].blank? && !@movie.genres.nil?
-        #   #selecting an existing genre from the checkbox AND creating a new genre)
-        #   @movie.genres << @movie.genres.new(name: params[:genre][:name])
-        # else params[:genre][:name].blank? && !@movie.genres.nil?
-        #   @movie.genre_ids = params[:genre][:genre_ids]
-        #   #the genre has already been created and is shown as checkboxes
-        # end
+        @movie = current_user.movies.build(params[:movie])
+
+        if !params[:director].blank?
+          @movie.director = Director.find_by(params[:id])
+        else
+          @movie.director = Director.create(params[:director])
+        end
+        binding.pry
+        if params[:genre]empty
+          @genre = Genre.find_by(params[:genre][:name])
+          @movie.genres << Genre.create(params[:name])
+        else
+          @genre = Genre.find_by(params[:id])
+          @movie.genres << Genre.create(params[:name])
+        end
+
         if @movie.save
           flash[:message] = "New movie succesfully saved!"
           redirect "/users/#{current_user.slug}/movies/#{@movie.id}"
