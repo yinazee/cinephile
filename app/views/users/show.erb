@@ -7,7 +7,7 @@
  <br>
  <br>
   <%@user.movies.each_with_index do |movie, index|%>
-    <%=index+1%>. <a href="/movies/movie.slug"><%=movie.name%></a>
+    <%=index+1%>. <a href="/users/<%=@user.slug%>/movies/<%=movie.id%>"><%=movie.name%></a>
     <br>
     <br>
   <%end%>
