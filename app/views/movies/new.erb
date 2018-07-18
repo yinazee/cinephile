@@ -16,11 +16,12 @@
     <br>
     <br>
 
-    <span>Director:</span>
+
+      <span>Director:</span>
       <select name="director[director_id]">
-        <option name="" value=""></option>
+        <option name="" value="" id=""></option>
         <%Director.all.each do |director|%>
-        <option value="<%=director.id%>"> <%=director.name%></option>
+        <option name="director[director_ids][]" value="<%=director.name%>" id="<%=director.id%>"><%=director.name%></<option>
         <%end%>
       </select><br>
       Or Create New Director: <input id= "director_id" type="text" name="director[name]"/>
@@ -28,7 +29,7 @@
       <br>
 
       <span>Genres:</span>
-        <%Genre.all.each do |genre|%>
+        <%@genres.each do |genre|%>
           <input type="checkbox" id="<%=genre.id%>" name="movie[genre_ids][]" value="<%=genre.name%>">
           <label><%=genre.name%></label>
           <% end %>

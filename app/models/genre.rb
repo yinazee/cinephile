@@ -2,6 +2,8 @@ class Genre < ActiveRecord::Base
   has_many :movie_genres
   has_many :movies, :through => :movie_genres
   #this also ties in with the directors assocaited with the movie.
+  validates_presence_of :name
+  validates :name, uniqueness: true
 
   def slug
     name.downcase.gsub(" ","-")

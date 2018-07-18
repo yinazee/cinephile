@@ -9,6 +9,21 @@ class MovieController < ApplicationController
     end
   end
 
+  get '/user/:slug/movies/new' do
+    if logged_in?
+      if Director.count < 300
+        DirScraper.scrape_url
+      end
+      @user = current_user
+      @genres = Genre.all
+      @directors = Director.all
+      erb :'/movies/new'
+    else
+      redirect '/'
+    end
+    erb :'/movies/new'
+  end
+
 
   post '/users/:slug/movies' do
       if params.values.any? {|value| value == ""}
@@ -19,15 +34,18 @@ class MovieController < ApplicationController
         @movie.name = params[:movie][:name]
         @movie.rating = params[:movie][:rating]
         @movie.review = params[:movie][:review]
-
-
-        if !params[:director][:id].blank?
-          @movie.director = Director.find(params[:id])
-        elsif !params[:director][:name].blank?
-          @movie.director = Director.create(params[:director])
-        else !params[:director][:id].blank? && !params[:director][:name].blank?
-          redirect "/users/#{current_user.slug}/movies/new"
+        if !params[:director][:director_id].blank? && !params[:director][:name].blank?
+            flash[:message] = "Please select only one director."
+            redirect to "/users/#{current_user.slug}/movies/new"
+        elsif !params[:director][:director_id].blank?
+            @movie.director_id = Director.find(params[:director][:director_id]).id
+        else #if user types in a director name that already exists
+          binding.pry
+          if Director.include?(params[:director][:name])
+            @movie.director = Director.create(params[:director][:name])
+          end
         end
+      end
 
         if params[:movie][:genre_ids] && params[:genre]#Genre checkbox AND New Genre
           @movie.genres << Genre.create(params[:genre])
@@ -41,16 +59,17 @@ class MovieController < ApplicationController
         if @movie.save
           flash[:message] = "New movie succesfully saved!"
           redirect "/users/#{current_user.slug}/movies/#{@movie.slug}"
-        else
-          flash[:message] = "**Please enter ALL fields**"
-          redirect "/users/#{current_user.slug}/movies/new"
+        # else
+        #   flash[:message] = "**Please enter ALL fields**"
+        #   redirect "/users/#{current_user.slug}/movies/new"
         end
       end
     end
 
+  end
+
 
     get '/users/:user_slug/movies/:movie_slug' do
-
       if logged_in?
         @user = current_user
         @movie = Movie.find_by_slug(params[:movie_slug])
@@ -60,19 +79,7 @@ class MovieController < ApplicationController
       end
     end
 
-    get '/user/:slug/movies/new' do
-      if logged_in?
-        if Director.count < 300
-          DirScraper.scrape_url
-        end
-        @user = current_user
-        @genres = Genre.all
-        erb :'/movies/new'
-      else
-        redirect '/'
-      end
-      erb :'/movies/new'
-    end
+
 
     get '/users/:slug/movies/:id/edit' do
     if logged_in?

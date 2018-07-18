@@ -7,7 +7,7 @@ class DirScraper < ActiveRecord::Base
     doc = Nokogiri::HTML(open(@@url))
     list = doc.search("tbody td.td16a div.list").text.split("\n")
     x_list = list.delete_if{|i|i== ""}
-    # there were "" in the list on the website, list.count = 300
+    # there were ""(blanks) in the list on the website, list.count = 300
 
     # get rid of number from name here
     name_array = x_list.collect do |director|
