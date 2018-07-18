@@ -1,9 +1,14 @@
+  <h2>Sign Up to Start Your Movie Review Collection!</h2>
 
-<h2>Sign Up to Start Your Movie Review Collection!</h2>
+  <p><a href='/login'> Already have an account?</a></p>
 
-<p><a href='/login'> Already have an account?</a></p>
+  <font color="red">
+    <% if flash.has?(:message) %>
+    <%= flash[:message] %>
+    <% end %>
+  </font>
+  <br>
 
-<p>*Please enter all fields</p>
 
 <form method="post" action="/signup">
   <label for="username">Username:</label>

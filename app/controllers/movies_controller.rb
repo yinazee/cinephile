@@ -9,19 +9,6 @@ class MovieController < ApplicationController
     end
   end
 
-  get '/user/:slug/movies/new' do
-    if logged_in?
-      if Director.count < 300
-        DirScraper.scrape_url
-      end
-      @user = current_user
-      @genres = Genre.all
-      erb :'/movies/new'
-    else
-      redirect '/'
-    end
-    erb :'/movies/new'
-  end
 
   post '/users/:slug/movies' do
       if params.values.any? {|value| value == ""}
@@ -33,12 +20,15 @@ class MovieController < ApplicationController
         @movie.rating = params[:movie][:rating]
         @movie.review = params[:movie][:review]
 
+
         if !params[:director][:id].blank?
           @movie.director = Director.find(params[:id])
-        else !params[:director][:name].blank?
+        elsif !params[:director][:name].blank?
           @movie.director = Director.create(params[:director])
+        else !params[:director][:id].blank? && !params[:director][:name].blank?
+          redirect "/users/#{current_user.slug}/movies/new"
         end
-        
+
         if params[:movie][:genre_ids] && params[:genre]#Genre checkbox AND New Genre
           @movie.genres << Genre.create(params[:genre])
           @movie.genres << Genre.find_by_name(params[:movie][:genre_ids])
@@ -59,14 +49,29 @@ class MovieController < ApplicationController
     end
 
 
-    get '/users/:slug/movies/:id' do
+    get '/users/:user_slug/movies/:movie_slug' do
+
       if logged_in?
         @user = current_user
-        @movie = Movie.find(params[:id])
+        @movie = Movie.find_by_slug(params[:movie_slug])
         erb :'/movies/show'
       else
         redirect '/login'
       end
+    end
+
+    get '/user/:slug/movies/new' do
+      if logged_in?
+        if Director.count < 300
+          DirScraper.scrape_url
+        end
+        @user = current_user
+        @genres = Genre.all
+        erb :'/movies/new'
+      else
+        redirect '/'
+      end
+      erb :'/movies/new'
     end
 
     get '/users/:slug/movies/:id/edit' do

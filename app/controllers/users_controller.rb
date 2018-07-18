@@ -9,7 +9,7 @@ class UserController < ApplicationController
   end
 
   post '/signup' do
-    if params.has_value?("")
+    if params.values.any? {|value| value == ""}
       flash[:message] = "Enter all fields."
       redirect "/signup"
     else
@@ -17,9 +17,9 @@ class UserController < ApplicationController
       if @user.save
         session[:user_id] = @user.id
         redirect "/users/#{@user.slug}"
-      # else
-      #   flash[:message] = "There was a problem creating this account!"
-      #   erb :'/users/signup'
+      else
+        flash[:message] = "There was a problem creating this account!"
+        erb :'/users/signup'
       end
     end
   end
