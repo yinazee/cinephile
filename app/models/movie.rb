@@ -4,7 +4,7 @@ class Movie < ActiveRecord::Base
   has_many :movie_genres
   has_many :genres, :through => :movie_genres
   validates_presence_of :name
-  validates :name, uniqueness: true
+
 
   def slug
     name.downcase.gsub(" ", "-")

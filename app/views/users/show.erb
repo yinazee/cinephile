@@ -3,11 +3,11 @@
  <%if @user.movies.empty?%>
   <a href="/user/:slug/movies/new">Create Your First Movie Review!</a>
  <%else%>
- <a href="/user/:slug/movies/new">Write Another Movie Review!</a>
+ <a href="/user/:slug/movies/new">Write a New Movie Review!</a>
  <br>
  <br>
   <%@user.movies.each_with_index do |movie, index|%>
-    <%=index+1%>. <a href="/users/<%=@user.slug%>/movies/<%=movie.id%>"><%=movie.name%></a>
+    <%=index+1%>. <a href="/users/<%=@user.slug%>/movies/<%=movie.slug%>"><%=movie.name%></a>
     <br>
     <br>
   <%end%>

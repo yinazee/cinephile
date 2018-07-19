@@ -58,6 +58,7 @@ class MovieController < ApplicationController
         if @movie.save
           flash[:message] = "New movie succesfully saved!"
           redirect "/users/#{current_user.slug}/movies/#{@movie.slug}"
+
         # else
         #   flash[:message] = "**Please enter ALL fields**"
         #   redirect "/users/#{current_user.slug}/movies/new"
