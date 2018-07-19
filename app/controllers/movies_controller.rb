@@ -26,13 +26,12 @@ class MovieController < ApplicationController
 
 
    post '/users/:slug/movies' do
-     binding.pry
       if params.values.any? {|value| value == ""}
         flash[:message] = "**Please enter ALL fields**"
         render "/movies/new"
         # render the name of the template
       else
-        binding.pry
+
         @movie = current_user.movies.build(params[:movie])
         # @movie.name = params[:movie][:name]
         # @movie.rating = params[:movie][:rating]
@@ -47,12 +46,12 @@ class MovieController < ApplicationController
         end
 
 
-      if params[:movie][:genre_ids] && params[:genre]#Genre checkbox AND New Genre
-        @movie.genres << Genre.create(params[:genre])
-        @movie.genres << Genre.find_by_name(params[:movie][:genre_ids])
-      elsif params[:movie][:genre_ids]#Genre check box only
+      if !params[:movie][:genre_ids].blank? && !params[:genre][:name].blank?#Genre checkbox AND New Genre
+        @movie.genres << Genre.find(params[:movie][:genre_ids])#checkbox genre
+        @movie.genres << Genre.create(params[:genre])#new genre
+      elsif !params[:movie][:genre_ids].blank?#Genre check box only
         @movie.genres << Genre.find_by(params[:movie][:genre_ids])
-      else #New Genre only
+      elsif !params[:genre][:name].blank?
         @movie.genres << Genre.create(params[:genre])
       end
 
