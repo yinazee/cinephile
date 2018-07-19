@@ -1,3 +1,6 @@
+-in delete route, movie_slug refers to the movie_id number instead
+  i do want to find by id, but dont know why that is under movie_slug
+  -also, i have to convert @movie.user_id to integer, how can i avoid doing that?
 
 
 priority
