@@ -25,36 +25,36 @@ class MovieController < ApplicationController
   end
 
 
-  post '/users/:slug/movies' do
+   post '/users/:slug/movies' do
+     binding.pry
       if params.values.any? {|value| value == ""}
         flash[:message] = "**Please enter ALL fields**"
-        redirect "/users/#{current_user.slug}/movies/new"
+        render "/movies/new"
+        # render the name of the template
       else
-        @movie = current_user.movies.build(params[:movies])
-        @movie.name = params[:movie][:name]
-        @movie.rating = params[:movie][:rating]
-        @movie.review = params[:movie][:review]
+        binding.pry
+        @movie = current_user.movies.build(params[:movie])
+        # @movie.name = params[:movie][:name]
+        # @movie.rating = params[:movie][:rating]
+        # @movie.review = params[:movie][:review]
         if !params[:director][:director_id].blank? && !params[:director][:name].blank?
             flash[:message] = "Please select only one director."
-            redirect to "/users/#{current_user.slug}/movies/new"
+            render "/movies/new"
+            # redirect to "/users/#{current_user.slug}/movies/new"
         elsif !params[:director][:director_id].blank?
             @movie.director_id = Director.find(params[:director][:director_id]).id
-        else #if user types in a director name that already exists
-          binding.pry
-          if Director.include?(params[:director][:name])
-            @movie.director = Director.create(params[:director][:name])
-          end
+        elsif @movie.director = Director.find_or_create_by(name: params[:director][:name])
         end
-      end
 
-        if params[:movie][:genre_ids] && params[:genre]#Genre checkbox AND New Genre
-          @movie.genres << Genre.create(params[:genre])
-          @movie.genres << Genre.find_by_name(params[:movie][:genre_ids])
-        elsif params[:movie][:genre_ids]#Genre check box only
-          @movie.genres << Genre.find_by(params[:movie][:genre_ids])
-        else #New Genre only
-          @movie.genres << Genre.create(params[:genre])
-        end
+
+      if params[:movie][:genre_ids] && params[:genre]#Genre checkbox AND New Genre
+        @movie.genres << Genre.create(params[:genre])
+        @movie.genres << Genre.find_by_name(params[:movie][:genre_ids])
+      elsif params[:movie][:genre_ids]#Genre check box only
+        @movie.genres << Genre.find_by(params[:movie][:genre_ids])
+      else #New Genre only
+        @movie.genres << Genre.create(params[:genre])
+      end
 
         if @movie.save
           flash[:message] = "New movie succesfully saved!"
@@ -66,7 +66,6 @@ class MovieController < ApplicationController
       end
     end
 
-  end
 
 
     get '/users/:user_slug/movies/:movie_slug' do
