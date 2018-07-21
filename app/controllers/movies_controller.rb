@@ -68,7 +68,6 @@ class MovieController < ApplicationController
     end
 
 
-
     get '/users/:user_slug/movies/:movie_slug' do
       if logged_in?
         @user = current_user
@@ -93,23 +92,14 @@ class MovieController < ApplicationController
   patch '/users/:user_slug/movies/:movie_slug' do
     if params.values.any? {|value| value == ""}
      flash[:message] = "Please enter all fields."
-     redirect "/users/#{current_user.slug}/movies/#{@movie.id}/edit"
+     redirect "/users/#{current_user.user_slug}/movies/#{@movie.slug}/edit"
    else
-     @movie = Movie.find(params[:id])
+     @movie = Movie.find_by_slug(params[:movie_slug])
      @movie.update(params[:movie])
 
-    #  if !params[:genre][:name].blank? && @movie.genres.nil? #creating the first genre by creating its params as genre[name]
-    #    @movie.genres << @movie.genres.new(name: params[:genre][:name])
-    #  elsif !params[:genre][:genre_name].blank? && !@movie.genres.nil? #selecting an existing genre from the checkbox AND creating a new genre (a Movie that has more than one genre
-    #    @movie.genres << @movie.genres.new(name: params[:genre][:name])
-    #    new_genre = @movie.genres.last.id.to_s
-    #    params[:genre][:genre_ids] << new_genre
-    #  else params[:genre][:genre_name].blank? && !@movie.genres.nil?
-    #    @movie.genre_ids = params[:genre][:genre_ids] #the genre has already been created and is shown as checkboxes
-    #  end
      @movie.save
      flash[:message] = "Your Movie has been updated!"
-     redirect "/users/#{current_user.slug}/movies/#{@movie.id}"
+     redirect "/users/#{current_user.slug}/movies/#{@movie.slug}"
    end
   end
 

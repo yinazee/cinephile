@@ -1,6 +1,5 @@
 <h2>Edit <%=@movie.name%></h2>
-
-<form action="/users/<%=@user.slug%>/movies/<%=@movie.id%>" method="post">
+<form action="/users/<%=@user.slug%>/movies/<%=@movie.slug%>" method="post">
   <input type="hidden" name="_method" value="patch">
 
   <span>Movie Title:</span>
@@ -40,8 +39,8 @@
       <br>
 
     <span>Review:</span>
-      <input type="text" id="review" name="movie[review]" value="<%=@movie.review%>"/>
+      <input type="text" id="review" name="movie[review]" value="<%=@movie.review%>" style="width: 300px;"/>
      <br>
 
-     <input type="submit" value="Edit"> | <button type="cancel" onclick="users/<%=@user.slug%>/movies/<%=@movie.id%>;return false;">Cancel</button>
+     <input type="submit" value="Save"> | <button type="cancel" onclick="users/<%=@user.slug%>/movies/<%=@movie.slug%>;return false;">Cancel</button>
    </form>
