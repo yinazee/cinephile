@@ -1,0 +1,19 @@
+
+<% if flash.has?(:message) %>
+  <%= flash[:message] %>
+<% end %>
+
+  <h2>Welcome, <%=@user.username.capitalize%></h2>
+
+ <%if @user.movies.empty?%>
+  <a href="/user/:slug/movies/new">Create Your First Movie Review!</a>
+ <%else%>
+ <a href="/user/:slug/movies/new">Write a New Movie Review!</a>
+ <br>
+ <br>
+  <%@user.movies.collect do |movie|%>
+    <a href="/users/<%=@user.slug%>/movies/<%=movie.slug%>"><%=movie.name.capitalize%></a>
+    <br>
+    <br>
+  <%end%>
+ <%end%>

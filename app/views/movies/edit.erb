@@ -18,12 +18,17 @@
 
     <span>Director:</span>
       <select>
+        <option name="" value="" id=""></option>
         <%Director.all.each do |director|%>
-        <option selected="selected" value="<%=@movie.director.name%>"><%= @movie.director.name %></option>
+        <option selected="director[director_id]" value="<%=@movie.director.name%>"><%= @movie.director.name %></option>
+        <option name="director[id]" value="<%=director.id%>" id="<%=director.id%>"><%=director.name%></<option>
+        <%end%>
+      </select>
+        <br>
         Or Create New Director: <input id= "director_id" type="text" name="director[name]"/>
         <br>
-      </select>
-      <%end%>
+
+
 
 
     <span>Genres:</span>

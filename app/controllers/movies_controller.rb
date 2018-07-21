@@ -3,8 +3,9 @@ class MovieController < ApplicationController
   get '/users/:slug/movies' do
     if logged_in?
       @user = current_user
-      erb :'/users/show'
+      erb :'/users/movies'
     else
+      flash[:message] = "Please login to view your movie reviews."
       redirect '/login'
     end
   end
@@ -77,8 +78,6 @@ class MovieController < ApplicationController
         redirect '/login'
       end
     end
-
-
 
     get '/users/:slug/movies/:id/edit' do
     if logged_in?
