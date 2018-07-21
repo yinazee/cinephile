@@ -28,16 +28,16 @@
         Or Create New Director: <input id= "director_id" type="text" name="director[name]"/>
         <br>
 
-
-
-
     <span>Genres:</span>
-      <select multiple>
-        <%Genre.all.each do |genre|%>
-        <option><a href="genres/new">Create a new Genre</a></option>
-        <option selected="selected" value="<%=@movie.genres%>"><%= @movie.genres %></option>
-      </select>
+
+      <% @genres.each do |genre| %>
+        <input type="checkbox" id="<%=genre.id%>" name="movie[genre_ids][]" value="<%=genre.id%>"><%=genre.name%></input>
+
       <%end%>
+      <br>
+      Or Create New Genre(s): <input id="genre_id" type="text" name="genre[name]"/>
+      <br>
+      <br>
 
     <span>Review:</span>
       <input type="text" id="review" name="movie[review]" value="<%=@movie.review%>"/>

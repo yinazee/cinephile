@@ -79,17 +79,18 @@ class MovieController < ApplicationController
       end
     end
 
-    get '/users/:slug/movies/:id/edit' do
+    get '/users/:user_slug/movies/:movie_slug/edit' do
     if logged_in?
       @user = current_user
-      @movie = Movie.find(params[:id])
-        erb :'/movies/edit'
+      @genres = Genre.all
+      @movie = Movie.find_by_slug(params[:movie_slug])
+      erb :'/movies/edit'
     else
       redirect '/login'
     end
   end
 
-  patch '/users/:slug/movies/:id' do
+  patch '/users/:user_slug/movies/:movie_slug' do
     if params.values.any? {|value| value == ""}
      flash[:message] = "Please enter all fields."
      redirect "/users/#{current_user.slug}/movies/#{@movie.id}/edit"
