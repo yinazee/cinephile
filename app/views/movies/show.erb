@@ -1,5 +1,4 @@
-
-  <% if flash.has?(:message) %>
+<% if flash.has?(:message) %>
     <%= flash[:message] %>
   <% end %>
 
@@ -15,7 +14,7 @@
     <span>Director: </span><%=@movie.director.name%>
     <br>
     <br>
-    <span>Genres: </span><%= @movie.genres.map {|genre| genre.name}.join(", ") %>
+    <span>Genres: </span><%= @movie.genres.collect {|genre| genre.name}.join(", ") %>
     <br>
     <br>
     <span>Review: </span><%=@movie.review%>

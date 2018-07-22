@@ -7,10 +7,9 @@
     <br>
 
     <span>Rating:</span>
-      <select name="movie[rating]" >
+      <select name="movie[rating]">
       <% (1..5).to_a.each do |number| %>
-      <option value="number"><%= number %></option>
-        <option selected="selected" value="<%=number%>"><%= @movie.rating %></option>
+      <option selected="selected" value="number"><%= number %></option>
       <% end %>
       </select>
     <br>

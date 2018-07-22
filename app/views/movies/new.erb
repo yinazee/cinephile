@@ -30,7 +30,6 @@
 
       <span>Genres:</span>
         <%@genres.each do |genre|%>
-        <!-- <label><%=genre.name%></label> -->
           <input type="checkbox" id="<%=genre.id%>" name="movie[genre_ids][]" value="<%=genre.id%>"><%=genre.name%></input>
           <% end %>
           <br>
