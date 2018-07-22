@@ -18,7 +18,7 @@ class DirScraper < ActiveRecord::Base
                 end
 
     name_order = name_array.sort
-    name_order.collect.each do |name|
+    name_array.collect.each do |name|
     Director.create(name: name)
 
     end

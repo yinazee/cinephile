@@ -34,19 +34,14 @@ class MovieController < ApplicationController
       else
 
         @movie = current_user.movies.build(params[:movie])
-        # @movie.name = params[:movie][:name]
-        # @movie.rating = params[:movie][:rating]
-        # @movie.review = params[:movie][:review]
         if !params[:director][:director_id].blank? && !params[:director][:name].blank?
             flash[:message] = "Please select only one director."
             render "/movies/new"
-            # redirect to "/users/#{current_user.slug}/movies/new"
         elsif !params[:director][:director_id].blank?
             @movie.director_id = Director.find(params[:director][:director_id]).id
         elsif @movie.director = Director.find_or_create_by(name: params[:director][:name])
+    
         end
-
-
       if !params[:movie][:genre_ids].blank? && !params[:genre][:name].blank?#Genre checkbox AND New Genre
         @movie.genres << Genre.find(params[:movie][:genre_ids])#checkbox genre
         @movie.genres << Genre.create(params[:genre])#new genre
@@ -60,9 +55,6 @@ class MovieController < ApplicationController
           flash[:message] = "New movie succesfully saved!"
           redirect "/users/#{current_user.slug}/movies/#{@movie.slug}"
 
-        # else
-        #   flash[:message] = "**Please enter ALL fields**"
-        #   redirect "/users/#{current_user.slug}/movies/new"
         end
       end
     end

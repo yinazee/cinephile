@@ -18,8 +18,8 @@
       <select>
         <option name="" value="" id=""></option>
         <%Director.all.each do |director|%>
-        <option selected="director[director_id]" value="<%=@movie.director.name%>"><%= @movie.director.name %></option>
-        <option name="director[id]" value="<%=director.id%>" id="<%=director.id%>"><%=director.name%></<option>
+
+        <option name="director[id]" value="<%=director.id%>" id="<%=director.id%>" <%= 'selected' if @movie.director.id == director.id %>><%=director.name%></<option>
         <%end%>
       </select>
         <br>
