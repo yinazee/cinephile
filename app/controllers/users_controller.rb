@@ -4,7 +4,7 @@ class UserController < ApplicationController
     if !logged_in?
       erb :'/users/signup'
     else
-      redirect "/users/#{@user.slug}"
+      redirect "/users/movies"
     end
   end
 
@@ -48,11 +48,24 @@ class UserController < ApplicationController
   end
 
   get '/logout' do
-      session.destroy
-      flash[:message] = "Good night and Good luck! - Edward R. Murrow"
+    if !logged_in?
       redirect "/"
+    else
+      session.destroy
+      flash[:message] = "You have been logged out of your account."
+      redirect "/login"
+    end
   end
 
 
+  get '/users/:user_slug' do
+    if logged_in?
+      @user = current_user
+      erb :'/users/movies'
+    else
+      flash[:message] = "Please login to view your movie reviews."
+      redirect '/login'
+    end
+  end
 
 end

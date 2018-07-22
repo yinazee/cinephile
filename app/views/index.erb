@@ -7,6 +7,8 @@
     <h2>Welcome, <%= current_user.username.capitalize %>!</h2>
     <a href="/user/<%=current_user.slug%>/movies/new">Write a movie review!</a>
   <% else %>
+
+  <h2>Welcome, please login!</h2>
     <form method="post" action="/login">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username">

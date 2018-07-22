@@ -17,9 +17,9 @@
     <ul>
       <li><a id="main" href="/">Main</a></li>
       <li><a id="main" href="/users/:slug/movies">Movies</a></li>
-      <li><a id="main" href="/directors/show">Directors</a></li>
-      <li><a id="main" href="/genres/show">Genres</a></li>
-      <li><a id="main" href="/ratings/show">Ratings</a></li>
+      <li><a id="main" href="/users/:slug/genres">Genres</a></li>
+      <li><a id="main" href="/users/:slug/ratings">Ratings</a></li>
+      <li><a id="main" href="/about">About</a></li>
       <% if !logged_in? %>
       <li><a id="main" href="/signup">Sign Up</a></li>
       <% else %>
@@ -29,7 +29,9 @@
   </div>
 
   <div class="bottom">
+    <%if logged_in?%>
     Logged in as <%=current_user.slug.capitalize%>
+    <%end%>
     <br>
     <br>
     <%= yield %>
