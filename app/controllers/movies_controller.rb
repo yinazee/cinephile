@@ -32,15 +32,15 @@ class MovieController < ApplicationController
         redirect '/user/#{current_user.slug}/movies/new'
         # render the name of the template
       else
-
+      
         @movie = current_user.movies.build(params[:movie])
-        if !params[:director][:director_id].blank? && !params[:director][:name].blank?
+        if !params[:movie][:director_id].blank? && !params[:director][:name].blank?
             flash[:message] = "Please select only one director."
-            render "/movies/new"
-        elsif !params[:director][:director_id].blank?
-            @movie.director_id = Director.find(params[:director][:director_id]).id
+            redirect '/user/#{current_user.slug}/movies/new'
+        elsif !params[:movie][:director_id].blank?
+            @movie.director = Director.find(params[:movie][:director_id])
         elsif @movie.director = Director.find_or_create_by(name: params[:director][:name])
-
+    binding.pry
         end
       if !params[:movie][:genre_ids].blank? && !params[:genre][:name].blank?#Genre checkbox AND New Genre
         @movie.genres << Genre.find(params[:movie][:genre_ids])#checkbox genre
