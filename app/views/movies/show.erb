@@ -1,22 +1,23 @@
-<% if flash.has?(:message) %>
-    <%= flash[:message] %>
-  <% end %>
-
-  <br><br>
+  <% if flash.has?(:message) %>
+      <%= flash[:message] %>
+    <% end %>
 
   <h2><%=@movie.name.capitalize%> Review</h2>
-
     <br>
-    <span>Rating: <%=@movie.rating%><span>
+  <%time = Time.new%>
+  <%values = time.to_a%>
+  <p>Last Updated: <%=Time.utc(*values)%></p>
     <br>
-    <br>
-    <span>Director: </span><%=@movie.director.name%>
-    <br>
-    <br>
-    <span>Genres: </span><%= @movie.genres.collect {|genre| genre.name}.join(", ") %>
+  <span>Rating: <%=@movie.rating%><span>
     <br>
     <br>
-    <span>Review: </span><%=@movie.review%>
+  <span>Director: </span><%=@movie.director.name%>
+    <br>
+    <br>
+  <span>Genres: </span><%= @movie.genres.collect {|genre| genre.name}.join(", ") %>
+    <br>
+    <br>
+  <span>Review: </span><%=@movie.review%>
     <br>
     <br>
 
@@ -25,5 +26,5 @@
     <input type="submit" value="Delete">
   </form>
 
-  <br>
+    <br>
   <p><a href="/users/<%=@user.slug%>/movies/<%=@movie.slug%>/edit">Edit</a></p>
