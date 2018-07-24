@@ -88,28 +88,25 @@ class MovieController < ApplicationController
      redirect "/users/#{current_user.user_slug}/movies/#{@movie.slug}/edit"
    else
      @movie = Movie.find_by_slug(params[:movie_slug])
-     @movie.update(params[:movie])
      @movie.rating = params[:movie][:rating]
-     binding.pry
-     @movie.update(params[:movie])
-     if !params[:movie][:director].blank? && !params[:director].blank?
-       #if checkbox and new field has value
-         flash[:message] = "Please select only one director."
-         redirect to "/users/#{current_user.slug}/movies/#{@movie.slug}/edit"
-     elsif !params[:movie][:director].blank?
+     if !params[:movie][:director].blank?
        #if checkbox has value
          @movie.director = Director.find(params[:movie][:director].to_i)
+
      elsif @director = Director.find_or_create_by(name: params[:director][:name])
        #if new field has value then create new, then pull the id and set it to @movie.director
        @movie.director = Director.find(@director.id)
      end
+
+
+
     # @movie.update(params[:movie])
      @movie.save
 
      flash[:message] = "Your Movie has been updated!"
      redirect "/users/#{current_user.slug}/movies/#{@movie.slug}"
    end
-  end
+ end
 
   delete '/users/:slug/movies/:movie_slug/delete' do
     if logged_in?

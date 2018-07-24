@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180715221945) do
+ActiveRecord::Schema.define(version: 20180724054202) do
 
   create_table "directors", force: :cascade do |t|
     t.string "name"
@@ -30,11 +30,10 @@ ActiveRecord::Schema.define(version: 20180715221945) do
     t.string   "name"
     t.integer  "rating"
     t.string   "review"
-    t.string   "user_id"
-    t.string   "director_id"
+    t.integer  "user_id"
+    t.integer  "director_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
-    t.integer  "genre_id"
   end
 
   create_table "users", force: :cascade do |t|
