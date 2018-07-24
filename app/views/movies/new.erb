@@ -18,10 +18,10 @@
 
 
       <span>Director:</span>
-      <select name="director[director_id]">
+      <select name="movie[director]">
         <option name="" value="" id=""></option>
         <%Director.all.each do |director|%>
-        <option name="director[id]" value="<%=director.id%>" id="<%=director.id%>"><%=director.name%></<option>
+        <option name="director[director_id]" value="<%=director.id%>" id="<%=director.id%>"><%=director.name%></<option>
         <%end%>
       </select><br>
       Or Create New Director: <input id= "director_id" type="text" name="director[name]"/>

@@ -29,7 +29,7 @@ class MovieController < ApplicationController
    post '/users/:slug/movies' do
       if params.values.any? {|value| value == ""}
         flash[:message] = "**Please enter ALL fields**"
-        render "/movies/new"
+        redirect '/user/#{current_user.slug}/movies/new'
         # render the name of the template
       else
 
@@ -40,7 +40,7 @@ class MovieController < ApplicationController
         elsif !params[:director][:director_id].blank?
             @movie.director_id = Director.find(params[:director][:director_id]).id
         elsif @movie.director = Director.find_or_create_by(name: params[:director][:name])
-    
+
         end
       if !params[:movie][:genre_ids].blank? && !params[:genre][:name].blank?#Genre checkbox AND New Genre
         @movie.genres << Genre.find(params[:movie][:genre_ids])#checkbox genre
@@ -61,6 +61,7 @@ class MovieController < ApplicationController
 
 
     get '/users/:user_slug/movies/:movie_slug' do
+
       if logged_in?
         @user = current_user
         @movie = Movie.find_by_slug(params[:movie_slug])
@@ -88,8 +89,23 @@ class MovieController < ApplicationController
    else
      @movie = Movie.find_by_slug(params[:movie_slug])
      @movie.update(params[:movie])
-
+     @movie.rating = params[:movie][:rating]
+     binding.pry
+     @movie.update(params[:movie])
+     if !params[:movie][:director].blank? && !params[:director].blank?
+       #if checkbox and new field has value
+         flash[:message] = "Please select only one director."
+         redirect to "/users/#{current_user.slug}/movies/#{@movie.slug}/edit"
+     elsif !params[:movie][:director].blank?
+       #if checkbox has value
+         @movie.director = Director.find(params[:movie][:director].to_i)
+     elsif @director = Director.find_or_create_by(name: params[:director][:name])
+       #if new field has value then create new, then pull the id and set it to @movie.director
+       @movie.director = Director.find(@director.id)
+     end
+    # @movie.update(params[:movie])
      @movie.save
+
      flash[:message] = "Your Movie has been updated!"
      redirect "/users/#{current_user.slug}/movies/#{@movie.slug}"
    end
