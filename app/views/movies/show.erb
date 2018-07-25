@@ -2,7 +2,7 @@
       <%= flash[:message] %>
     <% end %>
 
-  <h2><%=@movie.name.capitalize%> Review</h2>
+  <h2><%=@movie.name%> Review</h2>
     <br>
   <%time = Time.new%>
   <%values = time.to_a%>
@@ -11,7 +11,7 @@
   <span>Rating: <%=@movie.rating%><span>
     <br>
     <br>
-  <span>Director: </span><%=@movie.director%>
+  <span>Director: </span><%=@movie.director.name%>
     <br>
     <br>
   <span>Genres: </span><%= @movie.genres.collect {|genre| genre.name}.join(", ") %>

@@ -5,7 +5,7 @@ class MovieController < ApplicationController
       @user = current_user
       erb :'/users/movies'
     else
-      flash[:message] = "Please login to view your movie reviews."
+      flash[:message] = "Please login to view and create movie reviews."
       redirect '/login'
     end
   end
@@ -41,7 +41,7 @@ class MovieController < ApplicationController
             @movie.director = Director.find(params[:movie][:director_id])
         elsif @movie.director = Director.find_or_create_by(name: params[:director][:name])
         end
-        binding.pry
+
         @movie.genre_ids = params[:movie][:genre_ids]
         if !params[:genre][:name].blank?
           @movie.genres << Genre.find_or_create_by(name: params[:genre][:name])
@@ -51,14 +51,12 @@ class MovieController < ApplicationController
         if @movie.save
           flash[:message] = "New movie succesfully saved!"
           redirect "/users/#{current_user.slug}/movies/#{@movie.slug}"
-
         end
       end
     end
 
 
     get '/users/:user_slug/movies/:movie_slug' do
-
       if logged_in?
         @user = current_user
         @movie = Movie.find_by_slug(params[:movie_slug])
@@ -84,23 +82,22 @@ class MovieController < ApplicationController
      flash[:message] = "Please enter all fields."
      redirect "/users/#{current_user.user_slug}/movies/#{@movie.slug}/edit"
    else
-
      @movie = Movie.find_by_slug(params[:movie_slug])
      @movie.name = params[:movie][:name]
      @movie.rating = params[:movie][:rating]
-     if !params[:movie][:director].blank?
-       #if checkbox has value
-      @movie.director = Director.find(params[:movie][:director].to_i)
-     elsif @director = Director.find_or_create_by(name: params[:director][:name])
-       #if new field has value then create new, then pull the id and set it to @movie.director
-       @movie.director = Director.find(@director.id)
+
+     if !params[:movie][:director_id].blank?
+         @movie.director = Director.find(params[:movie][:director_id])
+     elsif @movie.director = Director.find_or_create_by(name: params[:director][:name])
      end
+
      @movie.genre_ids = params[:movie][:genre_ids]
     if !params[:genre][:name].blank?
       @movie.genres << Genre.find_or_create_by(name: params[:genre][:name])
     end
-    @movie.review = params[:movie][:review]
+    # @movie.review = params[:movie][:review]
     if current_user.id == @movie.user_id.to_i
+
      @movie.save
 
      flash[:message] = "Your Movie has been updated!"

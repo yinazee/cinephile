@@ -28,7 +28,7 @@
     </ul>
   </div>
 
-  <div class="bottom">
+  <div class="middle">
     <%if logged_in?%>
     Logged in as <%=current_user.slug.capitalize%>
     <%end%>
@@ -37,7 +37,9 @@
     <%= yield %>
     <br>
     <br>
+  </div>
 
+  <div class="bottom">
   <footer class="copyright">
     <small>&copy; 2018 <strong>Cinephile 🎬 by Yina Zhu</strong></small>
   </footer>

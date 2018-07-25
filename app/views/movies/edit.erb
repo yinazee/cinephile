@@ -15,10 +15,9 @@
     <br>
 
     <span>Director:</span>
-      <select name="movie[director]">
+      <select name="movie[director_id]">
         <option name="" value="" id=""></option>
-        <%Director.all.each do |director|%>
-
+        <%Director.all.sort.each do |director|%>
         <option name="director[director_id]" value="<%=director.id%>" id="<%=director.id%>" <%= 'selected' if @movie.director.id == director.id %>><%=director.name%></<option>
         <%end%>
       </select>
@@ -26,8 +25,8 @@
         Or Create New Director: <input id= "director_id" type="text" name="director[name]"/>
         <br>
 
-    <span>Genres:</span>
 
+    <span>Genres:</span>
       <% @genres.each do |genre| %>
         <input type="checkbox" id="<%=genre.id%>" name="movie[genre_ids][]" value="<%=genre.id%>"<%= 'checked' if @movie.genre_ids.include?(genre.id) %>><%=genre.name%></input>
 

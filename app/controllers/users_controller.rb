@@ -26,6 +26,7 @@ class UserController < ApplicationController
 
   get '/login' do
     if !logged_in?
+      flash[:message] = "Please login to view and create movie reviews."
       erb :'index'
     else
       flash[:message] = "You're logged in. Here are your movie reviews."

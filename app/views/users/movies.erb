@@ -8,8 +8,8 @@
  <a href="/user/:slug/movies/new">Write a New Movie Review!</a>
  <br>
  <br>
-  <%@user.movies.collect do |movie|%>
-    <a href="/users/<%=@user.slug%>/movies/<%=movie.slug%>"><%=movie.name.capitalize%></a>
+  <%@user.movies.each_with_index do |movie, index|%>
+    <%=index+1%>. <a href="/users/<%=@user.slug%>/movies/<%=movie.slug%>"><%=movie.name.capitalize%></a>
     <br>
     <br>
   <%end%>
