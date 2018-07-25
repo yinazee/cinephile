@@ -1,15 +1,13 @@
-
-
   <h2>Welcome, <%=@user.username.capitalize%></h2>
 
- <%if @user.movies.empty?%>
-  <a href="/user/:slug/movies/new">Create Your First Movie Review!</a>
- <%else%>
- <a href="/user/:slug/movies/new">Write a New Movie Review!</a>
- <br>
- <br>
-  <%@user.movies.each_with_index do |movie, index|%>
-    <%=index+1%>. <a href="/users/<%=@user.slug%>/movies/<%=movie.slug%>"><%=movie.name.capitalize%></a>
+  <%if @user.movies.empty?%>
+    <a href="/user/:slug/movies/new">Create Your First Movie Review!</a>
+  <%else%>
+    <a href="/user/:slug/movies/new">Write a New Movie Review!</a>
+    <br>
+    <br>
+    <%@user.movies.each_with_index do |movie, index|%>
+      <%=index+1%>. <a href="/users/<%=@user.slug%>/movies/<%=movie.slug%>"><%=movie.name.capitalize%></a>
     <br>
     <br>
   <%end%>

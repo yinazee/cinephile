@@ -30,23 +30,26 @@ class MovieController < ApplicationController
       if params.values.any? {|value| value == ""}
         flash[:message] = "**Please enter ALL fields**"
         redirect '/user/#{current_user.slug}/movies/new'
-        # render the name of the template
       else
-
         @movie = current_user.movies.build(params[:movie])
+
         if !params[:movie][:director_id].blank? && !params[:director][:name].blank?
+          #if checkbox and new director selected
             flash[:message] = "Please select only one director."
             redirect '/user/#{current_user.slug}/movies/new'
         elsif !params[:movie][:director_id].blank?
+          #current director
             @movie.director = Director.find(params[:movie][:director_id])
         elsif @movie.director = Director.find_or_create_by(name: params[:director][:name])
+          #new director
         end
 
         @movie.genre_ids = params[:movie][:genre_ids]
+        #sets variable to all genres
         if !params[:genre][:name].blank?
+          #if new genre, create it
           @movie.genres << Genre.find_or_create_by(name: params[:genre][:name])
         end
-
 
         if @movie.save
           flash[:message] = "New movie succesfully saved!"
