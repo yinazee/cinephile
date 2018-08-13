@@ -36,7 +36,7 @@ class MovieController < ApplicationController
         if !params[:movie][:director_id].blank? && !params[:director][:name].blank?
           #if checkbox and new director selected
             flash[:message] = "Please select only one director."
-            redirect '/user/#{current_user.slug}/movies/new'
+            render '/user/#{current_user.slug}/movies/new'
         elsif !params[:movie][:director_id].blank?
           #current director
             @movie.director = Director.find(params[:movie][:director_id])

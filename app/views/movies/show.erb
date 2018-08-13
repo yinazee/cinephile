@@ -4,10 +4,6 @@
 
   <h2><%=@movie.name%> Review</h2>
     <br>
-  <%time = Time.new%>
-  <%values = time.to_a%>
-  <p>Last Updated: <%=Time.utc(*values)%></p>
-    <br>
   <span>Rating: <%=@movie.rating%><span>
     <br>
     <br>
