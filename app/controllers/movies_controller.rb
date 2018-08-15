@@ -1,12 +1,14 @@
 class MovieController < ApplicationController
 
   get '/users/:slug/movies' do
-    if logged_in?
-      @user = current_user
-      erb :'/users/movies'
-    else
+    @user = current_user
+    if !logged_in?
       flash[:message] = "Please login to view and create movie reviews."
       redirect '/login'
+    elsif logged_in? && current_user.slug != params[:slug]
+       redirect "/users/#{current_user.slug}/movies"
+    else
+      erb :'users/movies'
     end
   end
 
@@ -98,10 +100,8 @@ class MovieController < ApplicationController
     if !params[:genre][:name].blank?
       @movie.genres << Genre.find_or_create_by(name: params[:genre][:name])
     end
-    # @movie.review = params[:movie][:review]
-    if current_user.id == @movie.user_id.to_i
 
-     @movie.save
+     if @movie.save
 
      flash[:message] = "Your Movie has been updated!"
      redirect "/users/#{current_user.slug}/movies/#{@movie.slug}"
