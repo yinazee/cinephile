@@ -1,5 +1,6 @@
 Home
 - Maybe incorporate latest movies with thumbnails
+- Maybe show a theme (top 5 list) with the first 5 lines of the review
 
 Rating
 - shows movies by ratings
@@ -15,3 +16,6 @@ Movies.all
 - shows all movies of all users and do a pluralize count method.
 - they will be indexed
 - do a top 10 most reviewed list
+
+Issues:
+fix text box alignment
