@@ -1,3 +1,7 @@
 <p>Work in Progress</p>
 
 <p>This will only show movies under categories you have selected.</p>
+
+<% @genres.each do |genre| %>
+<%= genre.name %><br>
+<%end%>

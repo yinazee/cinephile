@@ -9,6 +9,7 @@ class GenreController < ApplicationController
     #   flash[:message] = "Please login."
     #   redirect '/login'
     # end
+    @genres = Genre.all
     erb :'genres/genres'
   end
 
