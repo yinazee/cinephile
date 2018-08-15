@@ -1,22 +1,17 @@
--in delete route, movie_slug refers to the movie_id number instead
-  i do want to find by id, but dont know why that is under movie_slug
-  -also, i have to convert @movie.user_id to integer, how can i avoid doing that?
+Home
+- Maybe incorporate latest movies with thumbnails
 
+Rating
+- shows movies by ratings
+- show five stars at top
 
-priority
--deleting an entry and then being redirected to user/show page not working
--should not be able to log in with incomplete fields
--how to allow users to create multiple genres by comma seperation
--parse 300 directors https://digitaldreamdoor.com/pages/movie-pages/movie_directors.html
--how to get main.css going
+Genre
+- show movies categorized by drama and show the count next to it
 
-not priority
--verify email
--password requirement
--prevent duplicate username
--javascript(?) pop up of creating directors and genres
+Movie -
+- show all movies of only the logged in user
 
-Director scraper controller
-if Director.count < 300
-DirScraper.scrape_url
-end
+Movies.all
+- shows all movies of all users and do a pluralize count method.
+- they will be indexed
+- do a top 10 most reviewed list
