@@ -14,11 +14,17 @@ This app requires 'activerecord', '4.2.5', Ruby version over 2.3.0, Rails 5.1.4,
 Once you have them installed,
 
 fork & clone locally
+
 cd into local directory
+
 bundle install (requires shotgun to run localhost server)
+
 rake db:migrate
+
 run shotgun
+
 open browser to http://localhost:9393 
+
 create an account and start wiriting reviews!
 
 License
